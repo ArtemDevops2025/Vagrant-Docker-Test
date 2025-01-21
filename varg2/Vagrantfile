@@ -1,0 +1,15 @@
+ENV['VAGRANT_DEFAULT_PROVIDER'] = 'docker' # We define the provider to use which is Docker, Start of instruction 1
+Vagrant.configure("2") do |config| #Start of instruction 2
+    config.vm.define "serveur_web" do |serveur_web| # We define a name for the instance that we have to set up
+    serveur_web.vm.network "forwarded_port", guest: 80, host: 9000, auto_correct: true # We ask that port 9000 of the host be forwarded to port 80 of the container which can be corrected if port 9000 is already allocated.
+    serveur_web.vm.usable_port_range = (5000..5005) #  We define the range of ports that will be used in the case where port 9000 will be used on the host
+    serveur_web.vm.provider "docker" do |serveur_web| #  Beginning of instruction 3
+    serveur_web.image = "datascientest:vagrant" #  We define the image we want to use to launch the container
+    # admin.build_dir = "." # We can also set the location of the Dockerfile which is the current directory in order to build our image
+    serveur_web.has_ssh = true # Possible connection via SSH 
+    serveur_web.privileged = true # Execution of the container with privileges on the underlying machine
+    serveur_web.create_args = ["-v", "/sys/fs/cgroup:/sys/fs/cgroup:ro"] #  We create a volume that connects the cgroup directory of our host to that of our containers
+            serveur_web.name = "serveur_web_autocorrect" #We define a name for our container
+   end  #Fin de l'instruction 3
+  end  #Fin de l'instruction 2
+end  #Fin de l'instruction 1

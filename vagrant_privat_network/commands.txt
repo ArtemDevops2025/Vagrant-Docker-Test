@@ -1,0 +1,24 @@
+vagrant ssh
+sudo apt-get install nginx -y
+sudo systemctl enable --now nginx
+echo "WELCOME DATASCIENTEST"  > index.html
+sudo mv  index.html /var/www/html/
+sudo systemctl status nginx
+sudo systemctl reload nginx 
+curl http://localhost
+vagrant global-status --prune
+docker ps
+for private network
+ip addr
+-----------------------------------------
+vagrant ssh datascientest1
+ping 192.168.1.11
+ping 192.168.2.10   0 received,
+------------------------------------------
+vagrant ssh datascientest2
+ping 192.168.1.10
+ping 192.168.2.10
+-----------------------------
+vagrant ssh datascientest3
+ping 192.168.2.11
+ping 192.168.1.10   0 received
