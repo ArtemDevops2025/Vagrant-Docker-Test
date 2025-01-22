@@ -1,0 +1,48 @@
+Vagrant.configure("2") do |config|
+  config.vm.define "client1" do |client|
+    client.vm.network "private_network", type: "static", ip: "192.168.10.11"
+    client.vm.provider "docker" do |client|
+    client.image = "datascientest:vagrant" # Nous définissons l'image docker à utiliser
+    client.has_ssh = true
+    client.privileged = true
+    client.create_args = ["-v", "/sys/fs/cgroup:/sys/fs/cgroup:ro"]
+      client.name = "client1"
+  end
+end
+end
+  Vagrant.configure("2") do |config|
+  config.vm.define "client2" do |client|
+    client.vm.network "private_network", type: "static", ip: "192.168.10.12"
+    client.vm.provider "docker" do |client|
+    client.image = "datascientest:vagrant" # Nous définissons l'image docker à utiliser
+    client.has_ssh = true
+    client.privileged = true
+    client.create_args = ["-v", "/sys/fs/cgroup:/sys/fs/cgroup:ro"]
+      client.name = "client2"
+  end
+end
+  end
+  Vagrant.configure("2") do |config|
+  config.vm.define "client3" do |client|
+    client.vm.network "private_network", type: "static", ip: "192.168.10.13"
+    client.vm.provider "docker" do |client|
+    client.image = "datascientest:vagrant" # Nous définissons l'image docker à utiliser
+    client.has_ssh = true
+    client.privileged = true
+    client.create_args = ["-v", "/sys/fs/cgroup:/sys/fs/cgroup:ro"]
+      client.name = "client3"
+  end
+end
+end
+  Vagrant.configure("2") do |config|
+  config.vm.define "client4" do |client|
+    client.vm.network "private_network", type: "static", ip: "192.168.10.14"
+    client.vm.provider "docker" do |client|
+    client.image = "datascientest:vagrant" # Nous définissons l'image docker à utiliser
+    client.has_ssh = true
+    client.privileged = true
+    client.create_args = ["-v", "/sys/fs/cgroup:/sys/fs/cgroup:ro"]
+      client.name = "client4"
+  end
+end
+end
