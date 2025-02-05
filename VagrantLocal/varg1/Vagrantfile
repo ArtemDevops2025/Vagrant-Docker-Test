@@ -1,0 +1,14 @@
+ 
+ENV['VAGRANT_DEFAULT_PROVIDER'] = 'docker' # We define the provider to use which is Docker
+Vagrant.configure("2") do |config|
+    config.vm.define "server_web" do |server_web|
+        server_web.vm.network "forwarded_port", guest: 80, host: 9000 # Forward port 9000 on the host to port 80 on the container
+        server_web.vm.provider "docker" do |server_web|
+            server_web.image = "ubuntu:latest" # Use the ubuntu:latest image
+            server_web.has_ssh = true # Enable SSH connection
+            server_web.privileged = true # Run the container with privileges
+            server_web.create_args = ["-v", "/sys/fs/cgroup:/sys/fs/cgroup:ro"] # Mount the cgroup directory
+            server_web.name = "server_web" # Define a name for the container
+        end
+    end
+end

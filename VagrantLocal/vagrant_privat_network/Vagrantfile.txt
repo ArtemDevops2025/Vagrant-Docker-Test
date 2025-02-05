@@ -1,0 +1,42 @@
+ENV['VAGRANT_DEFAULT_PROVIDER'] = 'docker'
+
+Vagrant.configure("2") do |config|
+  config.vm.define "datascientest_1" do |datascientest_1|
+    datascientest_1.vm.network :private_network, type: "static", ip: "192.168.56.10", netmask: "24"
+    datascientest_1.vm.hostname = "datascientest1"
+
+    datascientest_1.vm.provider "docker" do |docker|
+      docker.image = "ubuntu:latest"
+      docker.has_ssh = true
+      docker.privileged = true
+      docker.create_args = ["-v", "/sys/fs/cgroup:/sys/fs/cgroup:ro"]
+      docker.name = "datascientest_1"
+    end
+  end
+
+  config.vm.define "datascientest_2" do |datascientest_2|
+    datascientest_2.vm.network :private_network, type: "static", ip: "192.168.56.11", netmask: 24
+    datascientest_2.vm.hostname = "datascientest2"
+
+    datascientest_2.vm.provider "docker" do |docker|
+      docker.image = "ubuntu:latest"
+      docker.has_ssh = true
+      docker.privileged = true
+      docker.create_args = ["-v", "/sys/fs/cgroup:/sys/fs/cgroup:ro"]
+      docker.name = "datascientest_2"
+    end
+  end
+
+  config.vm.define "datascientest_3" do |datascientest_3|
+    datascientest_3.vm.network :private_network, type: "static", ip: "192.168.56.12", netmask: 24
+    datascientest_3.vm.hostname = "datascientest3"
+
+    datascientest_3.vm.provider "docker" do |docker|
+      docker.image = "ubuntu:latest"
+      docker.has_ssh = true
+      docker.privileged = true
+      docker.create_args = ["-v", "/sys/fs/cgroup:/sys/fs/cgroup:ro"]
+      docker.name = "datascientest_3"
+    end
+  end
+end

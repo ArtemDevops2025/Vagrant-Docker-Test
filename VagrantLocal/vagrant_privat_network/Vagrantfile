@@ -1,0 +1,45 @@
+ENV['VAGRANT_DEFAULT_PROVIDER'] = 'docker'
+
+Vagrant.configure("2") do |config|
+  config.vm.define "client_private1" do |client_private1|
+    client_private1.vm.network :private_network, type: "static", ip: "192.168.56.10", netmask: "24"
+    client_private1.vm.hostname = "clientprivate1"
+
+    client_private1.vm.provider "docker" do |docker|
+      docker.image = "ubuntu:latest"
+      docker.has_ssh = true
+      docker.privileged = true
+      docker.create_args = ["-v", "/sys/fs/cgroup:/sys/fs/cgroup:ro"]
+      docker.name = "client_private1"
+   end
+  end
+end
+Vagrant.configure("2") do |config|
+  config.vm.define "admin" do |admin|
+    admin.vm.network :private_network, type: "static", ip: "192.168.56.11", netmask: 24
+    admin.vm.hostname = "admin"
+        admin.vm.network :private_network, ip: "192.168.57.11", netmask: 24
+        admin.vm.hostname="admin"
+    admin.vm.provider "docker" do |docker|
+      docker.image = "ubuntu:latest" # Use the custom image
+      docker.has_ssh = true
+      docker.privileged = true
+      docker.create_args = ["-v", "/sys/fs/cgroup:/sys/fs/cgroup:ro"]
+      docker.name = "admin"
+    end
+  end
+end
+Vagrant.configure("2") do |config|
+  config.vm.define "client_private2" do |client_private2|
+    client_private2.vm.network :private_network, type: "static", ip: "192.168.57.10", netmask: 24
+    client_private2.vm.hostname = "clientprivate2"
+
+    client_private2.vm.provider "docker" do |docker|
+      docker.image = "ubuntu:latest" # Use the custom image
+      docker.has_ssh = true
+      docker.privileged = true
+      docker.create_args = ["-v", "/sys/fs/cgroup:/sys/fs/cgroup:ro"]
+      docker.name = "client_private2"
+    end
+  end
+end

@@ -1,0 +1,43 @@
+vagrant ssh
+sudo apt-get install nginx -y
+sudo systemctl enable --now nginx
+echo "WELCOME DATASCIENTEST"  > index.html
+sudo mv  index.html /var/www/html/
+sudo systemctl status nginx
+sudo systemctl reload nginx 
+curl http://localhost
+vagrant global-status --prune
+docker ps
+for private network
+ip addr
+docker logs datascientest_2
+service ssh status
+docker network inspect vagrant_network
+ip addr show
+vagrant up --debug
+---------------------------------------------------Debug
+docker network create --subnet=192.168.56.0/24 vagrant_network      !!!!!!!!!
+docker start datascientest_2
+docker exec -it datascientest_2 /bin/bash
+service ssh status
+service ssh start
+docker network inspect vagrant_network
+sudo apt-get update
+sudo apt-get install -y iputils-ping
+-----------------------------------------
+ping 192.168.56.10
+ping 192.168.56.11
+ping 192.168.57.10
+
+
+vagrant ssh datascientest1
+ping 192.168.1.11
+ping 192.168.2.10   0 received,
+------------------------------------------
+vagrant ssh datascientest2
+ping 192.168.1.10
+ping 192.168.2.10
+-----------------------------
+vagrant ssh datascientest3
+ping 192.168.2.11
+ping 192.168.1.10   0 received

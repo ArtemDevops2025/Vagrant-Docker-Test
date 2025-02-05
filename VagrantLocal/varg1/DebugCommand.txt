@@ -1,0 +1,14 @@
+vagrant destroy -f
+docker build -t ubuntu:latest .
+docker run -d --name test-container ubuntu:latest
+docker exec -it test-container /bin/bash
+service ssh status
+service ssh start
+netstat -tuln | grep 22
+chmod 700 /home/vagrant/.ssh
+chmod 600 /home/vagrant/.ssh/authorized_keys
+chown -R vagrant:vagrant /home/vagrant/.ssh
+cat /home/vagrant/.ssh/authorized_keys
+
+vagrant provision
+vagrant ssh
