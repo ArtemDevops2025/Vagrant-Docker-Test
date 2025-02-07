@@ -1,7 +1,7 @@
 vagrant ssh
 sudo apt-get install nginx -y
 sudo systemctl enable --now nginx
-echo "WELCOME DATASCIENTEST"  > index.html
+echo "WELCOME"  > index.html
 sudo mv  index.html /var/www/html/
 sudo systemctl status nginx
 sudo systemctl reload nginx 
